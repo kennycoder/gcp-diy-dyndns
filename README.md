@@ -21,6 +21,19 @@ Whole purpose of this mini-project is to overcome the dynamic ip allocation by m
 
 ### Deploying
 
+Before anything, make sure you are authenticated to Google Cloud Platform:
+
+1. Run `gcloud auth login` and `gcloud auth application-default login`.
+2. Enable necessary APIS: 
+<pre>
+gcloud services enable cloudbuild.googleapis.com \
+cloudfunctions.googleapis.com \
+run.googleapis.com \
+dns.googleapis.com
+</pre>
+
+### Deploying
+
 1. Navigate to `terraform` folder.
 2. Customize `terraform.tfvars` based on `terraform.tfvars.template`.
 3. Run: `terraform init`, `terraform plan`, `terraform apply`
@@ -48,9 +61,13 @@ gcloud functions deploy diydns-function \
 
 2. Use this template: 
 
-    `30 * * * * curl -s "https://{CLOUD_FUNCTION_URL}/?key={YOUR_SECRET_KEY}&zone={YOUR_MANAGED_DNS_ZONE}&domain={YOUR_DNS_ENTRY_NAME}." >> /tmp/diydyndns-domain.log 2>&1`
+    `30 * * * * curl -s "https://{CLOUD_FUNCTION_URL}/?key={YOUR_SECRET_KEY}&zone={YOUR_MANAGED_DNS_ZONE}&domain={YOUR_DNS_ENTRY_NAME}." >> /tmp/diydyndns-domain.log 2>&1` 
 
-2. Check the `/tmp/diydyndns-domain.log` to see if it's working. By default it runs every 30 minutes.
+    > :info: Yes,  there is dot at the end of the domain entry - e.g.: `subdomain.domain.tld.`
+
+    > :info: This will run every 30 minutes, but you can adjust this number in the beginning of the line (from 30 to 60 for example).
+
+3. Check the `/tmp/diydyndns-domain.log` to see if it's working. By default it runs every 30 minutes.
 
 ## License
 
