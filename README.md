@@ -63,9 +63,9 @@ gcloud functions deploy diydns-function \
 
     `30 * * * * curl -s "https://{CLOUD_FUNCTION_URL}/?key={YOUR_SECRET_KEY}&zone={YOUR_MANAGED_DNS_ZONE}&domain={YOUR_DNS_ENTRY_NAME}." >> /tmp/diydyndns-domain.log 2>&1` 
 
-    > :info: Yes,  there is dot at the end of the domain entry - e.g.: `subdomain.domain.tld.`
+    > :heavy_exclamation_mark: Yes,  there is dot at the end of the domain entry - e.g.: `subdomain.domain.tld.`
 
-    > :info: This will run every 30 minutes, but you can adjust this number in the beginning of the line (from 30 to 60 for example).
+    > :information_source: This will run every 30 minutes, but you can adjust this number in the beginning of the line (from 30 to 60 for example).
 
 3. Check the `/tmp/diydyndns-domain.log` to see if it's working. By default it runs every 30 minutes.
 
